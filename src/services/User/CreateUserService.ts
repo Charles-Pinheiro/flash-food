@@ -20,23 +20,20 @@ interface UserRequest {
 }
 
 class CreateUserService {
-  async execute({
-    username,
-    password,
-    email,
-    firstName,
-    lastName,
-    isPartner,
-    street,
-    district,
-    number,
-    city,
-    state,
-    cep,
-  }: UserRequest) {
-    const addressData = { street, district, number, city, state, cep };
+  async execute(userRequest: UserRequest) {
+    const { street, district, number, city, state, cep } = userRequest;
+    const { username, password, email, firstName, lastName, isPartner } =
+      userRequest;
+
     const createAddressService = new CreateAddressService();
-    const address = await createAddressService.execute(addressData);
+    const address = await createAddressService.execute({
+      street,
+      district,
+      number,
+      city,
+      state,
+      cep,
+    });
 
     const userRepository = getCustomRepository(UserRepository);
 
@@ -56,3 +53,5 @@ class CreateUserService {
     return user;
   }
 }
+
+export default CreateUserService;

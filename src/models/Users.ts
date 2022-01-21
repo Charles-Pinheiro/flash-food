@@ -1,3 +1,4 @@
+import { Exclude } from "class-transformer";
 import {
   Column,
   CreateDateColumn,
@@ -17,6 +18,7 @@ export default class User {
   @Column()
   username: string;
 
+  @Exclude()
   @Column()
   password: string;
 
@@ -36,6 +38,7 @@ export default class User {
   @JoinColumn()
   address: Address;
 
+  @Exclude()
   @Column()
   addressId: string;
 

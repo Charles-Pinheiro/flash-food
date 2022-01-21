@@ -1,3 +1,4 @@
+import { Exclude } from "class-transformer";
 import {
   Column,
   CreateDateColumn,
@@ -5,10 +6,6 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-
-interface Coordinates {
-  coordinates: string;
-}
 
 @Entity("address")
 export default class Address {
@@ -33,8 +30,9 @@ export default class Address {
   @Column()
   cep: string;
 
+  @Exclude()
   @Column()
-  coordinate: string | Coordinates;
+  coordinate: string;
 
   @CreateDateColumn()
   createdAt: Date;

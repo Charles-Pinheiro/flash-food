@@ -23,16 +23,18 @@ interface Coordinates {
 class CreateAddressService {
   async execute(dataAddress: AddressRequest) {
     const addressRepository = getRepository(Address);
-    const tomtom = new TomTom("PSAvTwD8gEzcTOVHomChaD93ZMiMkgIa");
+    const tomtomKey: string = process.env.TOMTOM_KEY!;
 
-    let ResponseCoordinate = await tomtom.geocoding(dataAddress);
+    const tomtom = new TomTom(tomtomKey);
 
-    if (typeof ResponseCoordinate !== "string") {
-      ResponseCoordinate = ResponseCoordinate.coordinates;
+    let responseCoordinate = await tomtom.geocoding(dataAddress);
+
+    if (typeof responseCoordinate !== "string") {
+      responseCoordinate = responseCoordinate.coordinates;
     }
     const addressData = {
       ...dataAddress,
-      coordinate: ResponseCoordinate,
+      coordinate: responseCoordinate,
     };
 
     const address = addressRepository.create(addressData);
