@@ -1,6 +1,13 @@
+require("dotenv/config");
+
+interface JwtData {
+  secret: string;
+  expiresIn: string;
+}
+
 export default {
-    jwt: {
-      secret: "8422dbd9f4d4bbc30b6b4d57605da553",
-      expiresIn: "7d",
-    },
-  };
+  jwt: <JwtData>{
+    secret: process.env.JWT_SECRET,
+    expiresIn: process.env.JWT_EXPIRESIN,
+  },
+};
