@@ -1,5 +1,4 @@
-import { Entity, PrimaryColumn, Column, ManyToOne } from "typeorm";
-import { Store } from "./Stores";
+import { Entity, PrimaryColumn, Column } from "typeorm";
 
 @Entity("stor_category")
 export class StoreCategories {
