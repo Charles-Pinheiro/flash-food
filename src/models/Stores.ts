@@ -1,11 +1,11 @@
-import { Entity, PrimaryColumn, Column, ManyToOne, OneToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryColumn, Column, ManyToOne, OneToOne, JoinColumn, PrimaryGeneratedColumn } from "typeorm";
 import Address from "./Address";
-import { StoreCategories } from "./StoreCategories";
+import StoreCategories from "./StoreCategories";
 import User from "./Users";
 
-@Entity("stors")
+@Entity("stores")
 export class Store {
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn("uuid")
     store_id: string;
 
     @Column()
@@ -21,7 +21,7 @@ export class Store {
     userId: string;
 
     @ManyToOne(type => StoreCategories)
-    storeCategories: StoreCategories
+    storeCategories?: StoreCategories;
 
     @OneToOne(type => Address)
     @JoinColumn()

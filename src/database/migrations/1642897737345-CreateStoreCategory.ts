@@ -8,7 +8,7 @@ export class CreateStoreCategory1642897737345 implements MigrationInterface {
                 name: "store_category",
                 columns: [
                     {
-                        name: "id",
+                        name: "store_category_id",
                         type: "uuid",
                         isPrimary: true,
                         generationStrategy: "uuid",

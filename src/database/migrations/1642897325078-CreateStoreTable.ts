@@ -8,7 +8,7 @@ export class CreateStoreTable1642897325078 implements MigrationInterface {
                 name: "stores",
                 columns: [
                     {
-                        name: "id",
+                        name: "store_id",
                         type: "uuid",
                         isPrimary: true,
                         generationStrategy: "uuid",

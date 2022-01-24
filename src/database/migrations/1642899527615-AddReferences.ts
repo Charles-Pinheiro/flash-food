@@ -20,7 +20,7 @@ export class AddReferences1642899527615 implements MigrationInterface {
             new TableForeignKey({
                 name: "StoreCategoriesFK",
                 columnNames: ["categoryId"],
-                referencedColumnNames: ["id"],
+                referencedColumnNames: ["store_category_id"],
                 referencedTableName: "store_category",
                 onDelete: "CASCADE",
                 onUpdate: "CASCADE",

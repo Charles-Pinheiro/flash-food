@@ -1,8 +1,8 @@
-import { Entity, PrimaryColumn, Column } from "typeorm";
+import { Entity, PrimaryColumn, Column, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity("stor_category")
-export class StoreCategories {
-    @PrimaryColumn()
+@Entity("store_category")
+export default class StoreCategories {
+    @PrimaryGeneratedColumn("uuid")
     store_category_id: string;
 
     @Column()
