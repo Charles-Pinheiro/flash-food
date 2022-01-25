@@ -1,10 +1,11 @@
+import { Exclude } from "class-transformer";
 import { Entity, PrimaryColumn, Column, ManyToOne, OneToOne, JoinColumn, PrimaryGeneratedColumn } from "typeorm";
 import Address from "./Address";
 import StoreCategories from "./StoreCategories";
 import User from "./Users";
 
 @Entity("stores")
-export class Store {
+export default class Store {
     @PrimaryGeneratedColumn("uuid")
     store_id: string;
 
@@ -20,13 +21,15 @@ export class Store {
     @Column()
     userId: string;
 
+    @Exclude()
     @ManyToOne(type => StoreCategories)
     storeCategories?: StoreCategories;
 
-    @OneToOne(type => Address)
+    @OneToOne(type => Address, {eager: true})
     @JoinColumn()
     address: Address;
 
+    @Exclude()
     @ManyToOne(type => User)
     user: User;
 
