@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import CreateStoreService from "../../services/Store/CreateStoreService";
 
 
-class CreateStoreController {
+export default class CreateStoreController {
     async handle(request: Request, response: Response) {
 
         const createStore = new CreateStoreService();
@@ -12,5 +12,3 @@ class CreateStoreController {
         return response.status(201).json(classToClass(store));
     };
 };
-
-export default CreateStoreController;
