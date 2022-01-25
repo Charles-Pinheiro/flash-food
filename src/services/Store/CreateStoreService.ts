@@ -1,5 +1,5 @@
 import { getCustomRepository } from "typeorm";
-import { Store } from "../../models/Stores";
+import Store from "../../models/Stores";
 import { StoreRepository } from "../../repositories/Store/StoresRepository";
 import CreateAddressService from "../Address/CreateAddress";
 import CreateCategoryStoreService from "./CreateCategoryStoreService";

@@ -1,5 +1,5 @@
 import { EntityRepository, Repository } from "typeorm";
-import { Store } from "../../models/Stores";
+import Store from "../../models/Stores";
 
 
 @EntityRepository(Store)
