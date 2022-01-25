@@ -137,6 +137,11 @@
                 "tags": ["Stor"],
                 "summary": "List products by ID",
                 "description": "Rota para listar produtos da Store pelo ID",
+                "parameters": [{"in": "path", "name": "pk", "schema": {
+                    "type": "string"
+                },
+                "required": true
+            }],
                 "responses": {
                     "200": { "description": "Products of story by id" },
                     "401": { "description": "Incorrect Token" }
