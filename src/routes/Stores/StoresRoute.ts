@@ -3,6 +3,7 @@ import CreateStoreController from "../../controller/Stores/CreateStoreController
 import DeleteStoreController from "../../controller/Stores/DeleteStoreController";
 import ListProductByStoreController from "../../controller/Stores/ListProductByStoreController";
 import ListStoreByIdController from "../../controller/Stores/ListStoreByIdController";
+import ListStoreByLocalizationController from "../../controller/Stores/ListStoreByLocalizationController";
 import ListStoreController from "../../controller/Stores/ListStoreController";
 import { storeSchema } from "../../controller/Stores/schema";
 import UpdateStoreController from "../../controller/Stores/UpdateStoreController";
@@ -39,9 +40,14 @@ storeRouter.delete("/:store_id", (request, response) => {
     deleteStoreController.handle(request, response);
 });
 
-storeRouter.get("/:store_id/products", (request, response) => {    
+storeRouter.get("/:store_id/products", (request, response) => {        
     const listProductByStoreController = new ListProductByStoreController()
     listProductByStoreController.handle(request, response);
+});
+
+storeRouter.get("/category/range", (request, response) => {    
+    const listStoreByLocalizationService = new ListStoreByLocalizationController();
+    listStoreByLocalizationService.handle(request,response);
 });
 
 export default storeRouter;

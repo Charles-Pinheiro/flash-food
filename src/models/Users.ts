@@ -34,7 +34,7 @@ export default class User {
   @Column()
   isPartner: boolean;
 
-  @OneToOne(() => Address)
+  @OneToOne(() => Address, {eager: true})
   @JoinColumn()
   address: Address;
 
