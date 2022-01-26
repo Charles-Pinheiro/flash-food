@@ -33,26 +33,22 @@ export default class ListProductByStoreService {
             };
         };
 
-        try {
-            const store = await storeRepository.findOne(storeId);
+        const store = await storeRepository.findOne(storeId);
 
-            if(!store) {
-                throw new AppError("Store not found.", 404);
-            };
-
-            if(store.userId !== request.user.id) {
-                throw new AppError("No permission to view products from this store.", 403);
-            };
-
-            const products = await productsRepository.find({
-                where: {
-                    store: storeId
-                }
-            });
-            return products;
-
-        }catch(err) {                                    
-            throw new AppError("AppError");
+        if(!store) {
+            throw new AppError("Store not found.", 404);
         };
+
+        if(store.userId !== request.user.id) {
+            throw new AppError("No permission to view products from this store.", 403);
+        };
+
+        const products = await productsRepository.find({
+            where: {
+                store: storeId
+            }
+        });
+        return products;
+
     };
 };

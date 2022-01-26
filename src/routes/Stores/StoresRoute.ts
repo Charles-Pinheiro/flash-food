@@ -9,7 +9,6 @@ import { storeSchema } from "../../controller/Stores/schema";
 import UpdateStoreController from "../../controller/Stores/UpdateStoreController";
 import Authentication from "../../middlewares/Authentication";
 import validateSchema from "../../middlewares/ValidateSchema";
-import CreateStoreService from "../../services/Store/CreateStoreService";
 
 const storeRouter = Router();
 
