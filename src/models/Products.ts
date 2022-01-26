@@ -9,7 +9,7 @@ import {
     UpdateDateColumn
 } from "typeorm";
 import ProductCategory from "./ProductCategories";
-import { Store } from "./Stores";
+import Store from "./Stores";
 
 
 @Entity("products")

@@ -74,9 +74,9 @@ export default class UpdateStoreService {
             updateStore.name = storeRequest.name;
 
             await storeRepository.save(updateStore);
-        }catch(err) {
-                throw new AppError("Update Failed.")
-        }
+        }catch(err) {                
+                throw new AppError("Update Failed.");
+        };
         const newStore = await storeRepository.findOne(storeId);
 
         return newStore;
