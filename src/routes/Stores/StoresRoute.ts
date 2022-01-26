@@ -1,6 +1,7 @@
 import { Router } from "express";
 import CreateStoreController from "../../controller/Stores/CreateStoreController";
 import DeleteStoreController from "../../controller/Stores/DeleteStoreController";
+import ListProductByStoreController from "../../controller/Stores/ListProductByStoreController";
 import ListStoreByIdController from "../../controller/Stores/ListStoreByIdController";
 import ListStoreController from "../../controller/Stores/ListStoreController";
 import { storeSchema } from "../../controller/Stores/schema";
@@ -36,6 +37,11 @@ storeRouter.put("/:store_id", validateSchema(storeSchema), (request, response) =
 storeRouter.delete("/:store_id", (request, response) => {
     const deleteStoreController = new DeleteStoreController();
     deleteStoreController.handle(request, response);
+});
+
+storeRouter.get("/:store_id/products", (request, response) => {    
+    const listProductByStoreController = new ListProductByStoreController()
+    listProductByStoreController.handle(request, response);
 });
 
 export default storeRouter;
