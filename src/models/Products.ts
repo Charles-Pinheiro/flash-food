@@ -1,39 +1,37 @@
-import { Exclude } from "class-transformer";
 import {
-    Column,
-    CreateDateColumn,
-    Entity,
-    JoinColumn,
-    ManyToOne,
-    PrimaryGeneratedColumn,
-    UpdateDateColumn
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from "typeorm";
 import ProductCategory from "./ProductCategories";
-import { Store } from "./Stores";
-
+import Store from "./Stores";
 
 @Entity("products")
 export default class Product {
-    @PrimaryGeneratedColumn("uuid")
-    id: string;
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
-    @Column()
-    name: string;
+  @Column()
+  name: string;
 
-    @Column()
-    price: number;
+  @Column()
+  price: number;
 
-    @CreateDateColumn()
-    createdAt: Date;
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @UpdateDateColumn()
-    updatedAt: Date;
+  @UpdateDateColumn()
+  updatedAt: Date;
 
-    @ManyToOne(() => ProductCategory)
-    @JoinColumn()
-    category: ProductCategory;
+  @ManyToOne(() => ProductCategory)
+  @JoinColumn()
+  category: ProductCategory;
 
-    @ManyToOne(() => Store)
-    @JoinColumn()
-    store: Store;
+  @ManyToOne(() => Store)
+  @JoinColumn()
+  store: Store;
 }

@@ -1,33 +1,38 @@
 import {
-    Column,
-    CreateDateColumn,
-    Entity,
-    JoinColumn,
-    ManyToOne
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
 } from "typeorm";
-import Users from "./Users";
 import OrdersProducts from "./OrdersProducts";
-
+import User from "./Users";
 
 @Entity("orders")
 export default class Orders {
-    @Column()
-    productId: number;
+  @PrimaryGeneratedColumn("uuid")
+  ordersId: string;
 
-    @Column()
-    userId: number;
+  @Column()
+  productId: number;
 
-    @CreateDateColumn()
-    data: Date;
+  @Column()
+  userId: number;
 
-    @Column()
-    totalPrice: number;
+  @CreateDateColumn()
+  date: Date;
 
-    @ManyToOne(() => Users)
-    @JoinColumn()
-    users: Users;
+  @Column()
+  totalPrice: number;
 
-    @ManyToOne(() => OrdersProducts)
-    @JoinColumn()
-    orderProducts: OrdersProducts;
+  @OneToMany(() => OrdersProducts, (OrdersProducts) => OrdersProducts.order, {
+    eager: true,
+  })
+  products: OrdersProducts[];
+
+  @ManyToOne(() => User)
+  @JoinColumn()
+  users: User;
 }
