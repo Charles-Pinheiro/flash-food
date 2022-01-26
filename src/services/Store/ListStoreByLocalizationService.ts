@@ -44,8 +44,6 @@ export default class ListStoreByLocalizationService {
             
             return storeRange;
 
-        } else {
-            throw new AppError("No stores for this category", 404);
         };
     };
 };

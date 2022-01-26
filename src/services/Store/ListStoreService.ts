@@ -17,20 +17,15 @@ export default class ListStoreService {
             return allStores;            
         };        
 
-        try {
-            const [, token] = header.split(" ")
-            const { secret } = AuthConfig.jwt;
-            const { sub } = verify(token, secret);
+        const [, token] = header.split(" ")
+        const { secret } = AuthConfig.jwt;
+        const { sub } = verify(token, secret);
 
-            const stores = await storeRepository.find({
-                where: {
-                    userId: sub
-                }
-            });
-            return stores;
-
-        }catch(err) {            
-            throw new AppError("Inválid Token");
-        };
+        const stores = await storeRepository.find({
+            where: {
+                userId: sub
+            }
+        });
+        return stores;
     };
 };

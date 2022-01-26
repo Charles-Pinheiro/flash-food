@@ -7,12 +7,12 @@ export default class CreateCategoryProductService {
         const categoryProductRepository = getCustomRepository(CategoryProductRepository);
 
         const categoryProduct = await categoryProductRepository.findOne({
-            name,
+            name: name.toLowerCase()
         });
 
         if (!categoryProduct) {
             const newCategory = categoryProductRepository.create({
-                name,
+                name: name.toLowerCase()
             });
 
             await categoryProductRepository.save(newCategory);

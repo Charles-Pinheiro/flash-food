@@ -10,20 +10,15 @@ export default class ListStoreByIdService {
         const storeRepository = getCustomRepository(StoreRepository);
         const storeId = request.params.store_id;        
 
-        try {
-            const stores = await storeRepository.find({
-                where: {
-                    userId: request.user.id
-                }
-            });
+        const stores = await storeRepository.find({
+            where: {
+                userId: request.user.id
+            }
+        });
 
-            const filteredStores = stores.filter((store) => {                
-                return store.store_id == storeId
-            });                        
-            return filteredStores;
-
-        }catch(err) {            
-            throw new AppError("Inválid Token");
-        };
+        const filteredStores = stores.filter((store) => {                
+            return store.store_id == storeId
+        });                        
+        return filteredStores;
     };
 };
