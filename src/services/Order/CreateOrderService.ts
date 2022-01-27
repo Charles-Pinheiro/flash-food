@@ -13,6 +13,14 @@ interface Keys {
   quantity: number;
 }
 
+interface ValueProduct {
+  id: string;
+  name: string;
+  price: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export default class CreateOrdersService {
   async execute(ordersRequest: OrdersRequest, userId: string) {
     const productRepository = getCustomRepository(ProductRepository);
@@ -24,23 +32,41 @@ export default class CreateOrdersService {
     const { products } = ordersRequest;
 
     let totalPrice = 0;
+    let productList: Array<ValueProduct> = [];
 
-    products.forEach(async (item) => {
-      let product = await productRepository.findOne({ where: { id: item.id } });
+    // products.map(async (item) => {
+    //   let product = await productRepository.findOne({ where: { id: item.id } });
+
+    //   if (product) {
+    //     productList = [...productList, product];
+    //     totalPrice += item.quantity * product.price;
+    //   }
+
+    //   if (!product) {
+    //     throw new AppError(`ProductId ${item.id} not found`, 404);
+    //   }
+    // });
+
+    for (let p in products) {
+      let product = await productRepository.findOne({
+        where: { id: products[p].id },
+      });
+
       if (product) {
-        totalPrice += item.quantity * product.price;
+        productList = [...productList, product];
+        totalPrice += products[p].quantity * product.price;
       }
 
       if (!product) {
-        throw new AppError(`ProductId ${item.id} not found`, 404);
+        throw new AppError(`ProductId ${products[p].id} not found`, 404);
       }
-    });
+    }
+    console.log(productList);
 
     const order = ordersRepository.create({
-      userId: userId,
+      usersId: userId,
       totalPrice: totalPrice,
     });
-    console.log(order);
     await ordersRepository.save(order);
 
     products.forEach(async (item) => {

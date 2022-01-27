@@ -17,9 +17,10 @@ export default class Orders {
 
   // @Column()
   // productId: number;
+  // ordersProductsId;
 
   @Column()
-  userId: string;
+  usersId: string;
 
   @CreateDateColumn()
   date: Date;

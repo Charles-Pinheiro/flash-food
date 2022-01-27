@@ -7,7 +7,7 @@ export class RelationshipOdersProducts1643208340505
     await queryRunner.createForeignKey(
       "orders_products",
       new TableForeignKey({
-        name: "OrdersFK",
+        name: "OrdersProductsFK",
         columnNames: ["ordersId"],
         referencedColumnNames: ["ordersId"],
         referencedTableName: "orders",
@@ -30,7 +30,7 @@ export class RelationshipOdersProducts1643208340505
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey("orders_products", "OrdersFK");
+    await queryRunner.dropForeignKey("orders_products", "OrdersProductsFK");
     await queryRunner.dropForeignKey("orders_products", "ProductsFK");
   }
 }

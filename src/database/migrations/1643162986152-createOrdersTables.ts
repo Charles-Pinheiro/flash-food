@@ -18,7 +18,11 @@ export class createOrdersTables1643162986152 implements MigrationInterface {
             type: "uuid",
           },
           {
-            name: "userId",
+            name: "usersId",
+            type: "uuid",
+          },
+          {
+            name: "ordersProductsId",
             type: "uuid",
           },
           {
