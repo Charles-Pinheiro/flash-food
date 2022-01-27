@@ -1,30 +1,46 @@
-import { Router } from "express";
+import { request, Router } from "express";
 import Authentication from "../../middlewares/Authentication";
 import validateSchema from "../../middlewares/ValidateSchema";
+import storeOwner from "../../middlewares/StoreOwner";
 import { fiveLimitSchema } from "../../controller/Reviews/FiveStarsLimit";
 
 import CreateReviewController from "../../controller/Reviews/CreateReviewController";
 import ListReviewController from "../../controller/Reviews/ListReviewController";
 import DeleteReviewController from "../../controller/Reviews/DeleteReviewController"
+import UpdateReviewController from "../../controller/Reviews/UpdateProductController";
 
 const reviewRouter = Router();
 
 const createReview = new CreateReviewController();
+const listReview = new ListReviewController();
+const deleteReview = new DeleteReviewController();
+const updateReview = new UpdateReviewController();
 
 reviewRouter.post(
-    "/store/:store_id/", Authentication,
+    "/store/:store_id/", 
+    Authentication,
     validateSchema(fiveLimitSchema),
     createReview.handle
 );
 
-reviewRouter.get("/store/", Authentication, (request, response) => {
-    const listReviewController = new ListReviewController();
-    listReviewController.handle(request, response)
+reviewRouter.get("/store/", 
+    Authentication, (request, response) => {
+    listReview.handle(request, response)
 });
 
-reviewRouter.delete("/store/:idReview", Authentication, (request, response) => {
-    const deleteReviewController = new DeleteReviewController();
-    deleteReviewController.handle(request, response);
+reviewRouter.put(
+    "/store/:idReview/",
+    Authentication,
+    // storeOwner,clea
+    (request, response) => {
+        updateReview.handle(request, response)
+    }
+    
+);
+
+reviewRouter.delete("/store/:idReview/", 
+    Authentication, (request, response) => {
+    deleteReview.handle(request, response);
 });
 
 export default reviewRouter;
