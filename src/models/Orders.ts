@@ -15,8 +15,8 @@ export default class Orders {
   @PrimaryGeneratedColumn("uuid")
   ordersId: string;
 
-  @Column()
-  productId: number;
+  // @Column()
+  // productId: number;
 
   @Column()
   userId: string;

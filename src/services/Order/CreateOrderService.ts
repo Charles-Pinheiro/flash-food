@@ -24,7 +24,6 @@ export default class CreateOrdersService {
     const { products } = ordersRequest;
 
     let totalPrice = 0;
-    let productList = [];
 
     products.forEach(async (item) => {
       let product = await productRepository.findOne({ where: { id: item.id } });
@@ -37,7 +36,11 @@ export default class CreateOrdersService {
       }
     });
 
-    const order = ordersRepository.create({ totalPrice, userId });
+    const order = ordersRepository.create({
+      userId: userId,
+      totalPrice: totalPrice,
+    });
+    console.log(order);
     await ordersRepository.save(order);
 
     products.forEach(async (item) => {
