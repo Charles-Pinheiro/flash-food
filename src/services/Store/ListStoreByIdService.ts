@@ -1,7 +1,6 @@
 import { Request } from "express";
 import { getCustomRepository } from "typeorm";
 import { StoreRepository } from "../../repositories/Store/StoresRepository";
-import AppError from "../../errors/appError";
 import Store from "../../models/Stores";
 
 

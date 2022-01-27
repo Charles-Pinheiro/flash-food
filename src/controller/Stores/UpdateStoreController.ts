@@ -9,7 +9,7 @@ export default class UpdateStoreController {
         const updateStoreService = new UpdateStoreService();
 
         return await updateStoreService.execute(request).then(
-            res => {return response.json(res)}
+            res => {return response.json(classToClass(res))}
         ).catch(
             (err: AppError) => {
                 return response.status(err.statusCode).json({message: err.message})

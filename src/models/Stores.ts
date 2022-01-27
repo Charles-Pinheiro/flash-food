@@ -12,25 +12,28 @@ export default class Store {
     @Column()
     name: string;
 
+    @Exclude()
     @Column()
     categoryId: string;
 
+    @Exclude()
     @Column()
     addressId: string;
 
+    @Exclude()
     @Column()
     userId: string;
 
-    @Exclude()
-    @ManyToOne(type => StoreCategories)
-    storeCategories?: StoreCategories;
+    @ManyToOne(() => StoreCategories)
+    @JoinColumn()
+    storeCategories: StoreCategories;
 
-    @OneToOne(type => Address, {eager: true})
+    @OneToOne(() => Address, {eager: true})
     @JoinColumn()
     address: Address;
 
     @Exclude()
-    @ManyToOne(type => User)
+    @ManyToOne(() => User)
     user: User;
 
 };
