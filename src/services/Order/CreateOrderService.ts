@@ -13,7 +13,7 @@ interface Keys {
   quantity: number;
 }
 
-class CreateOrdersService {
+export default class CreateOrdersService {
   async execute(ordersRequest: OrdersRequest, userId: string) {
     const productRepository = getCustomRepository(ProductRepository);
     const ordersRepository = getCustomRepository(OrdersRepository);
