@@ -8,19 +8,19 @@ export default class OrdersProducts {
   ordersProductsId: string;
 
   @ManyToOne(() => Orders)
-  order: Orders;
+  order?: Orders;
 
   @ManyToOne(() => Product, { eager: true })
   product: Product;
 
   @Column()
-  ordersId: number;
+  orderId: string;
 
   @Column()
-  productsId: number;
+  productsId: string;
 
   @Column()
-  unitPrice: number;
+  unitePrice: number;
 
   @Column()
   quantity: number;

@@ -31,7 +31,7 @@ export default class CreateOrdersService {
 
     const { products } = ordersRequest;
 
-    let totalPrice = 0;
+    let totalPrice = 1;
     let productList: Array<ValueProduct> = [];
 
     // products.map(async (item) => {
@@ -47,37 +47,42 @@ export default class CreateOrdersService {
     //   }
     // });
 
-    for (let p in products) {
-      let product = await productRepository.findOne({
-        where: { id: products[p].id },
-      });
-
-      if (product) {
-        productList = [...productList, product];
-        totalPrice += products[p].quantity * product.price;
-      }
-
-      if (!product) {
-        throw new AppError(`ProductId ${products[p].id} not found`, 404);
-      }
-    }
-    console.log(productList);
-
     const order = ordersRepository.create({
       usersId: userId,
       totalPrice: totalPrice,
+      
     });
     await ordersRepository.save(order);
+
+    // for (let p in products) {
+    //   let product = await productRepository.findOne({
+    //     where: { id: products[p].id },
+    //   });
+
+    //   if (product) {
+    //     productList = [...productList, product];
+    //     totalPrice += products[p].quantity * product.price;
+    //   }
+
+    //   if (!product) {
+    //     throw new AppError(`ProductId ${products[p].id} not found`, 404);
+    //   }
+    // }
+    // console.log(productList);
+
+    
 
     products.forEach(async (item) => {
       let product = await productRepository.findOne({ where: { id: item.id } });
       const ordersProducts = ordersProductsRepository.create({
-        order: { ordersId: order.ordersId },
-        product: { id: item.id },
-        unitPrice: product?.price,
-        quantity: item.quantity,
+          order: { ordersId: order.ordersId },
+          orderId: order.ordersId,
+          product: { id: item.id },
+          productsId: item.id,
+          unitePrice: product?.price,
+          quantity: item.quantity
       });
-      await ordersProductsRepository.save(ordersProducts);
+      await ordersProductsRepository.save(ordersProducts);      
     });
 
     return order;

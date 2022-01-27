@@ -14,15 +14,7 @@ export class createOrdersTables1643162986152 implements MigrationInterface {
             default: "uuid_generate_v4()",
           },
           {
-            name: "productId",
-            type: "uuid",
-          },
-          {
             name: "usersId",
-            type: "uuid",
-          },
-          {
-            name: "ordersProductsId",
             type: "uuid",
           },
           {
@@ -44,6 +36,6 @@ export class createOrdersTables1643162986152 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable("orders");
+    // await queryRunner.dropTable("orders");
   }
 }
