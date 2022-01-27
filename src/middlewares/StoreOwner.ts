@@ -1,8 +1,8 @@
-import { NextFunction, Request } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import AppError from '../errors/appError';
 import { StoreRepository } from '../repositories/Store/StoresRepository';
 
-export default async function storeOwner(request: Request, next: NextFunction): Promise<void> {
+export default async function storeOwner(request: Request, _: Response ,next: NextFunction): Promise<void> {
     const userId = request.user.id;
 
     const { store_id } = request.params;
