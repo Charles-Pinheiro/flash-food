@@ -1,18 +1,17 @@
-import { classToClass } from "class-transformer";
 import { Request, Response } from "express";
 import AppError from "../../errors/appError";
-import UpdateStoreService from "../../services/Store/UpdateStoreService";
+import ListProductByStoreService from "../../services/Store/ListProductsByStoreService";
 
 
-export default class UpdateStoreController {
+export default class ListProductByStoreController {
     async handle(request: Request, response: Response) {
-        const updateStoreService = new UpdateStoreService();
+        const listproductByStoreService = new ListProductByStoreService();        
 
-        return await updateStoreService.execute(request).then(
+        return await listproductByStoreService.execute(request).then(
             res => {return response.json(res)}
         ).catch(
             (err: AppError) => {
                 return response.status(err.statusCode).json({message: err.message})
-        });
+        });     
     };
 };

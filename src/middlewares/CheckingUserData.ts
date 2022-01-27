@@ -19,11 +19,11 @@ export default async function checkingUserData(
   });
 
   if (email) {
-    throw new AppError("E-mail already registered");
+    throw new AppError("E-mail already registered", 409);
   }
 
   if (username) {
-    throw new AppError("Username already registered");
+    throw new AppError("Username already registered", 409);
   }
   next();
 }
