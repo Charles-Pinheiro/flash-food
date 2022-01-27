@@ -1,20 +1,20 @@
 import { Request } from "express";
 import { getCustomRepository } from "typeorm";
-import { StoreRepository } from "../../repositories/Store/StoresRepository";
+import { ReviewRepository } from "../../repositories/Reviews/ReviewsRepository"
 import AuthConfig from "../../config/auth";
 import { verify } from "jsonwebtoken";
 import AppError from "../../errors/appError";
 
-export default class ListStoreService {
+export default class ListReviewService {
     
     async execute(request: Request) {
-        const storeRepository = getCustomRepository(StoreRepository);
+
+        const reviewRepository = getCustomRepository(ReviewRepository);
         const header = request.headers.authorization?.replace("Bearer", "");                
 
         if(!header) {
-            const allStores = await storeRepository.find();
-            return allStores;            
-
+            const allReviews = await reviewRepository.find();
+            return allReviews;            
         };        
 
         try {
@@ -22,12 +22,12 @@ export default class ListStoreService {
             const { secret } = AuthConfig.jwt;
             const { sub } = verify(token, secret);
 
-            const stores = await storeRepository.find({
+            const reviews = await reviewRepository.find({
                 where: {
                     userId: sub
                 }
             });
-            return stores;
+            return reviews;
 
         }catch(err) {            
             throw new AppError("Inválid Token");

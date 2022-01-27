@@ -3,8 +3,8 @@ import { getCustomRepository } from "typeorm";
 import { StoreRepository } from "../../repositories/Store/StoresRepository";
 import AppError from "../../errors/appError";
 
-
 export default class ListStoreByIdService {
+    
     async execute(request: Request) {
         const storeRepository = getCustomRepository(StoreRepository);
         const storeId = request.params.store_id;        
