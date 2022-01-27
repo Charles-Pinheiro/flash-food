@@ -23,9 +23,9 @@ export default class CreateReviewService {
     const { stars, review }:IReview = request.body
 
     const reviewRepo = reviewRepository.create({
-      store: storeId,
+      storeId: storeId,
+      userId: userId,
       stars,
-      user: userId,
       review
     });
 

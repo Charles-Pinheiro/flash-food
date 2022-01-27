@@ -13,6 +13,12 @@ export default class Review {
 
     @Column()
     review: string;
+
+    @Column()
+    userId: string;
+
+    @Column()
+    storeId: string;
     
     @Exclude()
     @ManyToOne(type => User)
