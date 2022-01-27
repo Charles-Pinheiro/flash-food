@@ -10,6 +10,7 @@ class LoginController {
     const loginResponse = await loginService.execute({ email, password });
 
     return response.status(200).json(loginResponse);
+    
   }
 }
 

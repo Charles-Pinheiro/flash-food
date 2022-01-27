@@ -29,54 +29,51 @@ export default class UpdateStoreService {
         const createStoreCategory = new CreateCategoryStoreService();
         const addressRepository = getCustomRepository(AddressRepository);
 
-        try{
-            const updateStore = await storeRepository.findOne(storeId)
+        const updateStore = await storeRepository.findOne(storeId)
 
-            if(!updateStore) {
-                throw new AppError("Store not found.", 404);
-            };
+        if(!updateStore) {
+            throw new AppError("Store not found.", 404);
+        };
 
-            if(updateStore.userId !== request.user.id) {
-                throw new AppError("No permission for this store.", 403);
-            };
+        if(updateStore.userId !== request.user.id) {
+            throw new AppError("No permission for this store.", 403);
+        };
 
-            const address = await addressRepository.findOne(updateStore.addressId);
-            if(!address) {
-                throw new AppError("Address not found.", 404);
-            };
+        const address = await addressRepository.findOne(updateStore.addressId);
+        if(!address) {
+            throw new AppError("Address not found.", 404);
+        };
 
-            const responseCoordinate = await tomtom.geocoding({
-                street: storeRequest.street,
-                district: storeRequest.district,
-                city: storeRequest.city,
-                state: storeRequest.state,
-                cep: storeRequest.cep,
-                number: storeRequest.number
-            });
+        const responseCoordinate = await tomtom.geocoding({
+            street: storeRequest.street,
+            district: storeRequest.district,
+            city: storeRequest.city,
+            state: storeRequest.state,
+            cep: storeRequest.cep,
+            number: storeRequest.number
+        });
 
-            if (typeof responseCoordinate == "string") {
-                throw new AppError("Addressaddresss not found.", 404);
-            };
+        if(typeof responseCoordinate == "string") {
+            throw new AppError("Address not found.", 404);
+        };
 
-            address.street = storeRequest.street;
-            address.district = storeRequest.district;
-            address.city = storeRequest.city;
-            address.state = storeRequest.state;
-            address.cep = storeRequest.cep;
-            address.number = storeRequest.number;
-            address.coordinate = responseCoordinate.coordinates;
-            
-            await addressRepository.save(address);
+        address.street = storeRequest.street;
+        address.district = storeRequest.district;
+        address.city = storeRequest.city;
+        address.state = storeRequest.state;
+        address.cep = storeRequest.cep;
+        address.number = storeRequest.number;
+        address.coordinate = responseCoordinate.coordinates;
+        
+        await addressRepository.save(address);
 
-            const categoryStore = await createStoreCategory.execute(storeRequest.category);
+        const categoryStore = await createStoreCategory.execute(storeRequest.category);
 
-            updateStore.categoryId = categoryStore.store_category_id;
-            updateStore.name = storeRequest.name;
+        updateStore.categoryId = categoryStore.store_category_id;
+        updateStore.name = storeRequest.name;
 
-            await storeRepository.save(updateStore);
-        }catch(err) {
-                throw new AppError("Update Failed.")
-        }
+        await storeRepository.save(updateStore);
+
         const newStore = await storeRepository.findOne(storeId);
 
         return newStore;

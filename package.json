@@ -27,7 +27,7 @@
     "package.json": "^2.0.1",
     "pg": "^8.7.1",
     "swagger-ui-express": "^4.3.0",
-    "tomtom-lib": "^1.0.1",
+    "tomtom-lib": "^1.0.6",
     "typeorm": "^0.2.41",
     "uuid": "^8.3.2",
     "yup": "^0.32.11"

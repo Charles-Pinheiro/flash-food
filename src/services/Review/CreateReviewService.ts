@@ -17,14 +17,11 @@ export default class CreateReviewService {
     const userId = request.user.id
     const storeId = request.params.store_id
 
-    console.log('USER_ID: ', userId)
-    console.log('USER_STORE: ', storeId)
-
     const { stars, review }:IReview = request.body
 
     const reviewRepo = reviewRepository.create({
-      storeId: storeId,
-      userId: userId,
+      storeId,
+      userId,
       stars,
       review
     });

@@ -1,5 +1,5 @@
 Arguments: 
-  /home/diogo/.nvm/versions/node/v16.13.1/bin/node /usr/share/yarn/bin/yarn.js add swaggerUi
+  /home/diogo/.nvm/versions/node/v16.13.1/bin/node /usr/share/yarn/bin/yarn.js dev
 
 PATH: 
   /home/diogo/.asdf/shims:/home/diogo/.asdf/bin:/home/diogo/.nvm/versions/node/v16.13.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
@@ -14,17 +14,12 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/swaggerUi: Not found
-      at Request.params.callback [as _callback] (/usr/share/yarn/lib/cli.js:66988:18)
-      at Request.self.callback (/usr/share/yarn/lib/cli.js:140749:22)
-      at Request.emit (node:events:390:28)
-      at Request.<anonymous> (/usr/share/yarn/lib/cli.js:141721:10)
-      at Request.emit (node:events:390:28)
-      at IncomingMessage.<anonymous> (/usr/share/yarn/lib/cli.js:141643:12)
-      at Object.onceWrapper (node:events:509:28)
-      at IncomingMessage.emit (node:events:402:35)
-      at endReadableNT (node:internal/streams/readable:1343:12)
-      at processTicksAndRejections (node:internal/process/task_queues:83:21)
+  SyntaxError: /home/diogo/Documents/Drika/FlashFood/package.json: Unexpected token < in JSON at position 786
+      at JSON.parse (<anonymous>)
+      at /usr/share/yarn/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/usr/share/yarn/lib/cli.js:310:30)
+      at /usr/share/yarn/lib/cli.js:321:13
 
 npm manifest: 
   {
@@ -55,8 +50,12 @@ npm manifest:
       "jsonwebtoken": "^8.5.1",
       "package.json": "^2.0.1",
       "pg": "^8.7.1",
+  <<<<<<< HEAD
       "swagger-ui-express": "^4.3.0",
       "tomtom-lib": "^1.0.1",
+  =======
+      "tomtom-lib": "^1.0.6",
+  >>>>>>> 65c93407a5b7e997d039c09d638fe422f3eca01b
       "typeorm": "^0.2.41",
       "uuid": "^8.3.2",
       "yup": "^0.32.11"
@@ -1729,10 +1728,10 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/toidentifier/-/toidentifier-1.0.1.tgz#3be34321a88a820ed1bd80dfaa33e479fbb8dd35"
     integrity sha512-o5sSPKEkg/DIQNmH43V0/uerLrpzVedkUh8tGNvaeXpfpuwjKenlSox/2O/BTlZUtEe+JG7s5YhEz608PlAHRA==
   
-  tomtom-lib@^1.0.1:
-    version "1.0.1"
-    resolved "https://registry.yarnpkg.com/tomtom-lib/-/tomtom-lib-1.0.1.tgz#be00fd096cd2617664d08d6f3e44068b6c4cd856"
-    integrity sha512-Wvx0CctYufELrxXy7DjTMsViG4wfUffSJehyTvfY4xXySz7OJN5orQybhpbQgG2p42d3dKEFb891CBXDKFDFKA==
+  tomtom-lib@^1.0.6:
+    version "1.0.6"
+    resolved "https://registry.yarnpkg.com/tomtom-lib/-/tomtom-lib-1.0.6.tgz#e6cc8a897b42216f4301d07e0c1174095c26b51c"
+    integrity sha512-W51VSRjTUj7E6xVm3EtTas/5Nd1Yj0fmKaS/+vp8H8U9miUGSt2MtySBVKnPH2rmoAaMAuebVRwKpgvz8GKNpQ==
     dependencies:
       axios "^0.25.0"
   

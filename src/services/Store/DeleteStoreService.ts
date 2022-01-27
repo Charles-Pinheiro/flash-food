@@ -17,7 +17,7 @@ export default class DeleteStoreService {
         if(store.userId !== request.user.id) {
             throw new AppError("No permission for this store.", 403);
         };
-
         return storeRepository.delete(storeId);
+        
     };
 };

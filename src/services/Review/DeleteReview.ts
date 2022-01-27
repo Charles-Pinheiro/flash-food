@@ -17,7 +17,7 @@ export default class DeleteReviewService {
         };
 
         if(review.userId !== request.user.id) {
-            throw new AppError("No permission for this store.", 403);
+            throw new AppError("No permission for this review.", 403);
         };
 
         return reviewRepository.delete(idReview);
