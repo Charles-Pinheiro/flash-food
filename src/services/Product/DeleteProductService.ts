@@ -9,7 +9,7 @@ export default class DeleteProductService {
         const product = await productRepository.findOne(productId);
 
         if (!product) {
-            throw new AppError("Not found any product with this ID.", 404);
+            throw new AppError('Not found any product with this ID.', 404);
         }
 
         return productRepository.delete(productId);
