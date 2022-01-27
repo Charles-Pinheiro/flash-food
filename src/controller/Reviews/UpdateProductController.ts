@@ -7,7 +7,6 @@ export default class UpdateReviewController {
     async handle(request: Request, response: Response) {
 
         const updateReviewService = new UpdateReviewService();
-
     
         return await updateReviewService.execute(request).then(
             res => {return response.json(res)}

@@ -14,8 +14,6 @@ export default class UpdateReviewService {
         
         const { idReview } = request.params;
 
-        console.log('ID: ',idReview)
-
         const reviewRepository = getCustomRepository(ReviewRepository);
         const review = await reviewRepository.findOne(idReview);
         

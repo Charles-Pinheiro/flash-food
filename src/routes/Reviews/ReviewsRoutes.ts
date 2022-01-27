@@ -1,7 +1,6 @@
 import { request, Router } from "express";
 import Authentication from "../../middlewares/Authentication";
 import validateSchema from "../../middlewares/ValidateSchema";
-import storeOwner from "../../middlewares/StoreOwner";
 import { fiveLimitSchema } from "../../controller/Reviews/FiveStarsLimit";
 
 import CreateReviewController from "../../controller/Reviews/CreateReviewController";
@@ -31,7 +30,7 @@ reviewRouter.get("/store/",
 reviewRouter.put(
     "/store/:idReview/",
     Authentication,
-    // storeOwner,clea
+    validateSchema(fiveLimitSchema),
     (request, response) => {
         updateReview.handle(request, response)
     }
