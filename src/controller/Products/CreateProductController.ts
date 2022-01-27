@@ -4,7 +4,6 @@ import CreateProductService from "../../services/Product/CreateProductService";
 
 class CreateProductController {
     async handle(request: Request, response: Response) {
-
         const createProduct = new CreateProductService();
         const { store_id } = request.params;
 

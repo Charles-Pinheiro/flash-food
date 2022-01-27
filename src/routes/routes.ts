@@ -10,5 +10,6 @@ router.use("/accounts", accountsRouter);
 router.use("/login", LoginRouter);
 router.use("/store", storeRouter);
 router.use("/products", productRouter);
+router.use("/", productRouter);
 
 export default router;
