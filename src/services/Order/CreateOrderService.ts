@@ -31,58 +31,40 @@ export default class CreateOrdersService {
 
     const { products } = ordersRequest;
 
-    let totalPrice = 1;
+    let totalPrice = 0;
     let productList: Array<ValueProduct> = [];
 
-    // products.map(async (item) => {
-    //   let product = await productRepository.findOne({ where: { id: item.id } });
+    for (let p in products) {
+      let product = await productRepository.findOne({
+        where: { id: products[p].id },
+      });
 
-    //   if (product) {
-    //     productList = [...productList, product];
-    //     totalPrice += item.quantity * product.price;
-    //   }
+      if (product) {
+        productList = [...productList, product];
+        totalPrice += products[p].quantity * product.price;
+      }
 
-    //   if (!product) {
-    //     throw new AppError(`ProductId ${item.id} not found`, 404);
-    //   }
-    // });
+      if (!product) {
+        throw new AppError(`ProductId ${products[p].id} not found`, 404);
+      }
+    }
 
     const order = ordersRepository.create({
       usersId: userId,
       totalPrice: totalPrice,
-      
     });
+
     await ordersRepository.save(order);
-
-    // for (let p in products) {
-    //   let product = await productRepository.findOne({
-    //     where: { id: products[p].id },
-    //   });
-
-    //   if (product) {
-    //     productList = [...productList, product];
-    //     totalPrice += products[p].quantity * product.price;
-    //   }
-
-    //   if (!product) {
-    //     throw new AppError(`ProductId ${products[p].id} not found`, 404);
-    //   }
-    // }
-    // console.log(productList);
-
-    
 
     products.forEach(async (item) => {
       let product = await productRepository.findOne({ where: { id: item.id } });
       const ordersProducts = ordersProductsRepository.create({
-          order: { ordersId: order.ordersId },
-          orderId: order.ordersId,
-          product: { id: item.id },
-          productsId: item.id,
-          unitePrice: product?.price,
-          quantity: item.quantity
+        orderId: order.ordersId,
+        productsId: item.id,
+        unitePrice: product?.price,
+        quantity: item.quantity,
       });
-      await ordersProductsRepository.save(ordersProducts);      
+      await ordersProductsRepository.save(ordersProducts);
     });
 
     return order;

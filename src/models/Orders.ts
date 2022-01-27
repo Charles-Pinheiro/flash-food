@@ -8,16 +8,13 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import OrdersProducts from "./OrdersProducts";
+import Product from "./Products";
 import User from "./Users";
 
 @Entity("orders")
 export default class Orders {
   @PrimaryGeneratedColumn("uuid")
   ordersId: string;
-
-  // @Column()
-  // productId: number;
-  // ordersProductsId;
 
   @Column()
   usersId: string;
@@ -31,7 +28,7 @@ export default class Orders {
   @OneToMany(() => OrdersProducts, (OrdersProducts) => OrdersProducts.order, {
     eager: true,
   })
-  products: OrdersProducts[];
+  products: Product[];
 
   @ManyToOne(() => User)
   @JoinColumn()
