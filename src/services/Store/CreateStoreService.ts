@@ -1,6 +1,8 @@
 import { getCustomRepository } from "typeorm";
+import AppError from "../../errors/appError";
 import Store from "../../models/Stores";
 import { StoreRepository } from "../../repositories/Store/StoresRepository";
+import { UserRepository } from "../../repositories/UserReposytory";
 import CreateAddressService from "../Address/CreateAddress";
 import CreateCategoryStoreService from "./CreateCategoryStoreService";
 
@@ -23,6 +25,13 @@ interface UserId {
 export default class CreateStoreService {
     public async execute(storeRequest: StoreRequest, userId: UserId ): Promise<Store> {
         const {name, category, street, district, number, city, state, cep} = storeRequest;
+
+        const userRepository = getCustomRepository(UserRepository);
+        const user = await userRepository.findOne(userId);
+
+        if(!user?.isPartner) {
+            throw new AppError("You need to be a partner", 401);
+        };
 
         const createStoreCategory = new CreateCategoryStoreService();
         const categoryStore = await createStoreCategory.execute(category);
