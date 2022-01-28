@@ -1,4 +1,4 @@
-## Documentação: https://flashfoodapi.herokuapp.com/api-documentation
+## Documentação de rotas no swagger: https://flashfoodapi.herokuapp.com/api-documentation
 
 # FLASHFOOD 🍟
 
