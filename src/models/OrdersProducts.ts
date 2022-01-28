@@ -19,7 +19,7 @@ export default class OrdersProducts {
   @Column()
   productsId: string;
 
-  @Column()
+  @Column("decimal", { precision: 5, scale: 2 })
   unitePrice: number;
 
   @Column()

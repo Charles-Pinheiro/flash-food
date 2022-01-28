@@ -19,7 +19,7 @@ export default class Product {
   @Column()
   name: string;
 
-  @Column()
+  @Column("decimal", { precision: 5, scale: 2 })
   price: number;
 
   @CreateDateColumn()

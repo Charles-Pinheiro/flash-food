@@ -22,7 +22,7 @@ export default class Orders {
   @CreateDateColumn()
   date: Date;
 
-  @Column()
+  @Column("decimal", { precision: 5, scale: 2 })
   totalPrice: number;
 
   @OneToMany(() => OrdersProducts, (OrdersProducts) => OrdersProducts.order, {
