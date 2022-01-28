@@ -1,4 +1,4 @@
-## Documentação: http://localhost:3000/api-documentation
+## Documentação: https://flashfoodapi.herokuapp.com/api-documentation
 
 # FLASHFOOD 🍟
 
