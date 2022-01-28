@@ -205,8 +205,46 @@
             "get": {
                 "tags": ["Store"],
                 "security":[{"bearerAuth": []}],
-                "summary": "List categories by range",
+                "summary": "List categories of range",
                 "description": "Rota para listar as categorias",
+                "responses": {
+                    "200": { "description": "Products of story by id" },
+                    "401": { "description": "Incorrect Token" }
+                }
+            }
+        },
+        "/store?category={category}": {
+            "get": {
+                "tags": ["Store"],
+                "security":[{"bearerAuth": []}],
+                "summary": "List stores by category",
+                "description": "Rota para listar os stores pela categoria",
+                "parameters": [{"in": "path", "name": "category", "schema": {
+                    "type": "string"
+                },
+                    "required": true
+                }],
+                "responses": {
+                    "200": { "description": "Products of story by id" },
+                    "401": { "description": "Incorrect Token" }
+                }
+            }
+        },
+        "/store/{store_id}/products?category={category}": {
+            "get": {
+                "tags": ["Store"],
+                "security":[{"bearerAuth": []}],
+                "summary": "List products of stores by category",
+                "description": "Rota para listar os produtos de uma store pela categoria",
+                "parameters": [{"in": "path", "name": "category", "schema": {
+                    "type": "string"
+                },
+                    "required": true
+                }, {"in": "path", "name": "store_id", "schema": {
+                    "type": "string"
+                },
+                    "required": true
+                }],
                 "responses": {
                     "200": { "description": "Products of story by id" },
                     "401": { "description": "Incorrect Token" }
@@ -399,11 +437,17 @@
                 }
             }
         },
-        "api/stor/{pk}/orders/": {
+        "store/{store_id}/orders": {
             "post": {
                 "tags": ["Orders"],
+                "security":[{"bearerAuth": []}],
                 "summary": "Create Order",
                 "description": "Rota para criar um order",
+                "parameters": [{"in": "path", "name": "store_id", "schema": {
+                    "type": "string"
+                },
+                    "required": true
+                }],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -427,12 +471,12 @@
                 }
             }
         },
-        "api/stor/orders/": {
+        "/store/orders": {
             "get": {
                 "tags": ["Orders"],
+                "security":[{"bearerAuth": []}],
                 "summary": "All Orders",
                 "description": "Rota para exibir os orders",
-        
                 "responses": {
                     "200": { "description": "All orders" },
                     "401": { "description": "Incorrect Token" }
