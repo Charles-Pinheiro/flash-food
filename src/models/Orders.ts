@@ -28,7 +28,7 @@ export default class Orders {
   @OneToMany(() => OrdersProducts, (OrdersProducts) => OrdersProducts.order, {
     eager: true,
   })
-  products: OrdersProducts[];
+  products: Product[];
 
   @ManyToOne(() => User)
   @JoinColumn()
