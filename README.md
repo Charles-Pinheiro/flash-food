@@ -1,4 +1,4 @@
-# Documentação: http://localhost:3000/api-documentation
+## Documentação: http://localhost:3000/api-documentation
 
 # FLASHFOOD 🍟
 
@@ -17,33 +17,46 @@ tem permissão para listar as lojas próximas a seu endereço realizar um pedido
 
 ## **_Como Instalar?_**
 
-- Para instalar, é necessário clonar o projeto e fazer instalação das dependências.
+- Para instalar, é necessário clonar o projeto e fazer instalação das dependências, entre em um terminal e siga o passo a passo abaixo:
 
-### Clonando o Projeto:
+### 1 - Clona o Projeto:
 
 ```
 git clone https://gitlab.com/Humberto16/FlashFood
+
 ```
 
-### Depois de clonado entre na pasta do projeto:
+### 2 - Depois de clonado, entre na pasta do projeto:
 
 ```
 cd FlashFood
+
 ```
 
-### Instalando as Dependências:
+### 3 - Instale as Dependências:
 
 ```
 yarn
+
 ```
 
-### Para Iniciar a aplicação rode o comando abaixo:
+### 4 - Crie um banco de dados e configure de acordo com o arquivo .env.example
+
+
+### 5 - Rode as migrations
+
+```
+yarn typeorm migration:run
+
+```
+
+### 6 - Para Iniciar a aplicação rode o comando abaixo:
 
 ```
 yarn dev
 
 ```
-### Se tudo for feito corretamente, vai aparecer normalmente as mensagens:
+### 7 - Se tudo for feito corretamente, vai aparecer normalmente as mensagens:
 
 ```
 Database connected...
