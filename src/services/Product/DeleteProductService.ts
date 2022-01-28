@@ -3,7 +3,7 @@ import AppError from "../../errors/appError";
 import { ProductRepository } from "../../repositories/Product/ProductRepository";
 
 export default class DeleteProductService {
-    async execute(productId: string): Promise<DeleteResult> {
+    async execute(productId: string) {
         const productRepository = getCustomRepository(ProductRepository);
 
         const product = await productRepository.findOne(productId);
