@@ -55,7 +55,11 @@ npm manifest:
       "tomtom-lib": "^1.0.1",
   =======
       "tomtom-lib": "^1.0.6",
+<<<<<<< HEAD
   >>>>>>> 5890ad73c379b0613ad4d5ca0d4f3e6e8f6e8e81
+=======
+  >>>>>>> 65c93407a5b7e997d039c09d638fe422f3eca01b
+>>>>>>> 54e1f6ea484b7bc57ac3e6eaeef054672bb1448b
       "typeorm": "^0.2.41",
       "uuid": "^8.3.2",
       "yup": "^0.32.11"
