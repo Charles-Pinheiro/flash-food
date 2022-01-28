@@ -9,7 +9,7 @@ export default class DeleteStoreController {
         return await deleteStoreService.execute(request).then(
             res => {return response.status(204).json(res)}
         ).catch(
-            (err: AppError) => {
+            (err: AppError) => {                
                 return response.status(err.statusCode).json({message: err.message})
             });       
     };

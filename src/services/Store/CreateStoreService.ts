@@ -45,7 +45,8 @@ export default class CreateStoreService {
             addressId: address.id,
             userId: userId.id,
             name,
-            
+            address:address,
+            storeCategories: categoryStore
         });
         await storeRepository.save(store);
         return store;

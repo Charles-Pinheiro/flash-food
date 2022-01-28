@@ -12,7 +12,7 @@ interface ProductRequest {
 }
 
 export default class CreateProductService {
-    public async execute(productRequest: ProductRequest, store_id: string): Promise<Product> {
+    public async execute(productRequest: ProductRequest, store_id: string){
         const {name, price, category} = productRequest;
 
         const createProductCategory = new CreateCategoryProductService();
@@ -36,5 +36,6 @@ export default class CreateProductService {
 
         await productRepository.save(product);
         return product;
+
     };
 };

@@ -69,6 +69,7 @@ export default class UpdateStoreService {
 
         const categoryStore = await createStoreCategory.execute(storeRequest.category);
 
+        updateStore.storeCategories = categoryStore;
         updateStore.categoryId = categoryStore.store_category_id;
         updateStore.name = storeRequest.name;
 
