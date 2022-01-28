@@ -16,19 +16,19 @@ const deleteReview = new DeleteReviewController();
 const updateReview = new UpdateReviewController();
 
 reviewRouter.post(
-    "/store/:store_id/", 
+    "/store/:store_id", 
     Authentication,
     validateSchema(fiveLimitSchema),
     createReview.handle
 );
 
-reviewRouter.get("/store/", 
+reviewRouter.get("/store", 
     Authentication, (request, response) => {
     listReview.handle(request, response)
 });
 
 reviewRouter.put(
-    "/store/:idReview/",
+    "/store/:idReview",
     Authentication,
     validateSchema(fiveLimitSchema),
     (request, response) => {

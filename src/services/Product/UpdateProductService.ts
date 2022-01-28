@@ -15,17 +15,22 @@ export default class UpdateProductService {
     async execute(productId: string, body: ProductRequest) {
         const productRepository = getCustomRepository(ProductRepository);
         const categoryRepository = getCustomRepository(CategoryProductRepository);
+        const createProductCategory = new CreateCategoryProductService();
 
+       try{
         const product = await productRepository.findOne(productId);
-        const category = await categoryRepository.findOne(body.category);
-        if (!category) {
-            const createProductCategory = new CreateCategoryProductService();
-            createProductCategory.execute(body.category);
-        }
+        // const category = await categoryRepository.findOne(body.category);
+        // if (!category) {
+        //     const createProductCategory = new CreateCategoryProductService();
+        //     createProductCategory.execute(body.category);
+        // }
+        const category = await createProductCategory.execute(body.category);
 
         if (!product) {
             throw new AppError('Not found any product with this ID.', 404);
         }
+        console.log(category);
+        
 
         product.name = body.name;
         product.price = body.price;
@@ -38,5 +43,9 @@ export default class UpdateProductService {
         const updatedProduct = await productRepository.findOne(productId);
 
         return updatedProduct;
+       }catch(err){
+           console.log(err);
+           
+       }
     }
 }
