@@ -27,7 +27,7 @@ export default class CreateProductService {
             throw new AppError('store not found!', 404);
         }
 
-        try{const product = productRepository.create({
+        const product = productRepository.create({
             category: categoryProduct,
             price,
             name,
@@ -36,9 +36,6 @@ export default class CreateProductService {
 
         await productRepository.save(product);
         return product;
-        }catch(err){
-            console.log(err);
-            
-        }
+
     };
 };
