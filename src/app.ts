@@ -2,10 +2,20 @@ import express, { NextFunction, Request, Response } from "express";
 import "express-async-errors";
 import router from "../src/routes/routes";
 import AppError from "./errors/appError";
+import swaggerUiExpress from "swagger-ui-express";
+import swaggerDocument from "./swagger.json";
 
 const app = express();
 
 app.use(express.json());
+
+app.use(
+  "/api-documentation",
+  swaggerUiExpress.serve,
+  swaggerUiExpress.setup(swaggerDocument)
+);
+
+
 app.use(router);
 
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
