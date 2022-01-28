@@ -37,7 +37,8 @@
                 },
                 "responses": {
                     "201": { "description": "User created successfully" },
-                    "400": { "description": "incorrect request or user already exists" }
+                    "400": { "description": "incorrect request" },
+                    "401": { "description": "User already exists" }
                 }
             }    
         },
@@ -63,13 +64,14 @@
                 "responses": {
                     "200": { "description": "Login successfully" },
                     "401": { "description": "Incorrect email or password" },
-                    "500": { "description": "Internal Server Error" }
+                    "400": { "description": "incorrect request"}
                 }
             }  
         },
         "/store": {
             "post": {
-                "tags": ["Stor"],
+                "tags": ["Store"],
+                "security":[{"bearerAuth": []}],
                 "summary": "Register Stor",
                 "description": "Rota para criar Stor",
                 "requestBody": {
@@ -99,60 +101,43 @@
                 }
             },
             "get": {
-                "tags": ["Stor"],
+                "tags": ["Store"],
+                "security":[{"bearerAuth": []}],
                 "summary": "All stors",
                 "description": "Rota para listar Stors",
-                
                 "responses": {
                     "200": { "description": "All stors" },
                     "401": { "description": "Incorrect Token" }
                 }
             }    
         },
-        "/api/stor?category=restaurante": {
+        "/store/{store_id}": {
             "get": {
-                "tags": ["Stor"],
-                "summary": "List Story By Category",
-                "description": "Rota para Listar store pela categoria",
-                "responses": {
-                    "200": { "description": "All stors by category" },
-                    "401": { "description": "Incorrect Token" }
-                }
-            }
-        },
-        "/api/stor/{pk}/products?category=drink": {
-            "get": {
-                "tags": ["Stor"],
-                "summary": "List products by Category",
-                "description": "Rota para listar produtos da Store pela categoria",
-                "responses": {
-                    "200": { "description": "All products by category" },
-                    "401": { "description": "Incorrect Token" }
-
-                }
-            }
-        },
-        "/api/store/products/{pk}": {
-            "get": {
-                "tags": ["Stor"],
-                "summary": "List products by ID",
-                "description": "Rota para listar produtos da Store pelo ID",
-                "parameters": [{"in": "path", "name": "pk", "schema": {
+                "tags": ["Store"],
+                "security":[{"bearerAuth": []}],
+                "summary": "List Story By ID",
+                "description": "Rota para Listar uma store especifica",
+                "parameters": [{"in": "path", "name": "store_id", "schema": {
                     "type": "string"
                 },
-                "required": true
-            }],
+                    "required": true
+                }],
                 "responses": {
-                    "200": { "description": "Products of story by id" },
-                    "401": { "description": "Incorrect Token" }
+                    "200": { "description": "All stors by category" },
+                    "401": { "description": "Incorrect Token" },
+                    "404": { "description": "Stor Not Found" }
                 }
-            }
-        },
-        "api/store/{pk}": {
+            },
             "put": {
-                "tags": ["Stor"],
+                "tags": ["Store"],
+                "security":[{"bearerAuth": []}],
                 "summary": "Updated Stor",
                 "description": "Rota para atualizar Stor",
+                "parameters": [{"in": "path", "name": "store_id", "schema": {
+                    "type": "string"
+                },
+                    "required": true
+                }],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -176,26 +161,108 @@
                 "responses": {
                     "200": { "description": "Stor updated successfully" },
                     "400": { "description": "incorrect request" },
-                    "401": { "description": "Incorrect Token" }
+                    "401": { "description": "Incorrect Token" },
+                    "404": { "description": "Stor Not Found" }
                 }
             },
             "delete": {
-                "tags": ["Stor"],
+                "tags": ["Store"],
+                "security":[{"bearerAuth": []}],
                 "summary": "Deleted Stor",
                 "description": "Rota para deletar Stor",
+                "parameters": [{"in": "path", "name": "store_id", "schema": {
+                    "type": "string"
+                },
+                    "required": true
+                }],
                 "responses": {
                     "204": { "description": "Stor deleted successfully" },
                     "400": { "description": "incorrect request" },
                     "401": { "description": "Incorrect Token" },
-                    "404": { "description": "Stor Not Found" }
+                    "404": { "description": "Store Not Found" }
                 }
             } 
         },
-        "/api/{pk}/product/": {
+        "/store/{store_id}/products": {
+            "get": {
+                "tags": ["Store"],
+                "security":[{"bearerAuth": []}],
+                "summary": "List products by ID",
+                "description": "Rota para listar produtos da Store pelo ID",
+                "parameters": [{"in": "path", "name": "store_id", "schema": {
+                    "type": "string"
+                },
+                    "required": true
+                }],
+                "responses": {
+                    "200": { "description": "Products of story by id" },
+                    "401": { "description": "Incorrect Token" },
+                    "404": { "description": "Stor Not Found" }
+                }
+            }
+        },
+        "/category/range": {
+            "get": {
+                "tags": ["Store"],
+                "security":[{"bearerAuth": []}],
+                "summary": "List categories of range",
+                "description": "Rota para listar as categorias",
+                "responses": {
+                    "200": { "description": "Products of story by id" },
+                    "401": { "description": "Incorrect Token" }
+                }
+            }
+        },
+        "/store?category={category}": {
+            "get": {
+                "tags": ["Store"],
+                "security":[{"bearerAuth": []}],
+                "summary": "List stores by category",
+                "description": "Rota para listar os stores pela categoria",
+                "parameters": [{"in": "path", "name": "category", "schema": {
+                    "type": "string"
+                },
+                    "required": true
+                }],
+                "responses": {
+                    "200": { "description": "Products of story by id" },
+                    "401": { "description": "Incorrect Token" }
+                }
+            }
+        },
+        "/store/{store_id}/products?category={category}": {
+            "get": {
+                "tags": ["Store"],
+                "security":[{"bearerAuth": []}],
+                "summary": "List products of stores by category",
+                "description": "Rota para listar os produtos de uma store pela categoria",
+                "parameters": [{"in": "path", "name": "category", "schema": {
+                    "type": "string"
+                },
+                    "required": true
+                }, {"in": "path", "name": "store_id", "schema": {
+                    "type": "string"
+                },
+                    "required": true
+                }],
+                "responses": {
+                    "200": { "description": "Products of story by id" },
+                    "401": { "description": "Incorrect Token" }
+                }
+            }
+        },
+        
+        "/products/{store_id}": {
             "post": {
                 "tags": ["Product"],
+                "security":[{"bearerAuth": []}],
                 "summary": "Created product",
                 "description": "Rota para criar um produto",
+                "parameters": [{"in": "path", "name": "store_id", "schema": {
+                    "type": "string"
+                },
+                    "required": true
+                }],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -219,11 +286,21 @@
                 }
             }
         },
-        "/api/{pk}/product/{pk}/": {
-            "patch": {
+        "/products/{store_id}/product/{product_id}": {
+            "put": {
                 "tags": ["Product"],
+                "security":[{"bearerAuth": []}],
                 "summary": "Updated product",
                 "description": "Rota para atualizar um produto",
+                "parameters": [{"in": "path", "name": "store_id", "schema": {
+                    "type": "string"
+                },
+                    "required": true
+                }, {"in": "path", "name": "product_id", "schema": {
+                    "type": "string"
+                },
+                    "required": true
+                }],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -247,8 +324,18 @@
             },
             "delete": {
                 "tags": ["Product"],
+                "security":[{"bearerAuth": []}],
                 "summary": "Deleted product",
                 "description": "Rota para apagar um produto",
+                "parameters": [{"in": "path", "name": "store_id", "schema": {
+                    "type": "string"
+                },
+                    "required": true
+                }, {"in": "path", "name": "product_id", "schema": {
+                    "type": "string"
+                },
+                    "required": true
+                }],
                 "responses": {
                     "204": { "description": "Product deleted successfully" },
                     "401": { "description": "Incorrect Token" },
@@ -256,11 +343,30 @@
                 }
             }
         },
-        "api/stor/{pk}/review/": {
+        "reviews/store": {
+            "get": {
+                "tags": ["Review"],
+                "security":[{"bearerAuth": []}],
+                "summary": "All Reviews",
+                "description": "Rota para exibir os reviews",
+        
+                "responses": {
+                    "200": { "description": "All reviews" },
+                    "401": { "description": "Incorrect Token" }
+                }
+            }
+        },
+        "reviews/store/{store_id}": {
             "post": {
                 "tags": ["Review"],
+                "security":[{"bearerAuth": []}],
                 "summary": "Create Review",
                 "description": "Rota para criar um review",
+                "parameters": [{"in": "path", "name": "store_id", "schema": {
+                    "type": "string"
+                },
+                    "required": true
+                }],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -282,21 +388,16 @@
                     "404": { "description": "Review Not Found" }
                 }
             },
-            "get": {
-                "tags": ["Review"],
-                "summary": "Review by ID",
-                "description": "Rota para exibir um review especifico",
-                "responses": {
-                    "200": { "description": "Review by ID" },
-                    "401": { "description": "Incorrect Token" },
-                    "400": { "description": "Incorrect request" },
-                    "404": { "description": "Review Not Found" }
-                }
-            },
             "put": {
                 "tags": ["Review"],
+                "security":[{"bearerAuth": []}],
                 "summary": "Update Review",
                 "description": "Rota para atualizar um review",
+                "parameters": [{"in": "path", "name": "id", "schema": {
+                    "type": "string"
+                },
+                    "required": true
+                }],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -320,8 +421,14 @@
             },
             "delete": {
                 "tags": ["Review"],
+                "security":[{"bearerAuth": []}],
                 "summary": "Delete Review",
                 "description": "Rota para deletar um review",
+                "parameters": [{"in": "path", "name": "id", "schema": {
+                    "type": "string"
+                },
+                    "required": true
+                }],
                 "responses": {
                     "204": { "description": "Deleted Review" },
                     "401": { "description": "Incorrect Token" },
@@ -330,11 +437,17 @@
                 }
             }
         },
-        "api/stor/{pk}/orders/": {
+        "store/{store_id}/orders": {
             "post": {
                 "tags": ["Orders"],
+                "security":[{"bearerAuth": []}],
                 "summary": "Create Order",
                 "description": "Rota para criar um order",
+                "parameters": [{"in": "path", "name": "store_id", "schema": {
+                    "type": "string"
+                },
+                    "required": true
+                }],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -358,16 +471,25 @@
                 }
             }
         },
-        "api/stor/orders/": {
+        "/store/orders": {
             "get": {
                 "tags": ["Orders"],
+                "security":[{"bearerAuth": []}],
                 "summary": "All Orders",
                 "description": "Rota para exibir os orders",
-        
                 "responses": {
                     "200": { "description": "All orders" },
                     "401": { "description": "Incorrect Token" }
                 }
+            }
+        }
+    },
+    "components":{
+        "securitySchemes":{
+            "bearerAuth":{
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
             }
         }
     }
