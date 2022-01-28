@@ -33,6 +33,7 @@ export default class Product {
     @JoinColumn()
     category: ProductCategory;
 
+    @Exclude()
     @ManyToOne(() => Store)
     @JoinColumn()
     store: Store;

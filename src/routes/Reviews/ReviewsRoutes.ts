@@ -22,8 +22,8 @@ reviewRouter.post(
     createReview.handle
 );
 
-reviewRouter.get("/store", 
-    Authentication, (request, response) => {
+reviewRouter.get("/store/:store_id", 
+    (request, response) => {
     listReview.handle(request, response)
 });
 

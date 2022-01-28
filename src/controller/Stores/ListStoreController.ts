@@ -1,3 +1,4 @@
+import { classToClass } from "class-transformer";
 import { Request, Response } from "express";
 import ListStoreService from "../../services/Store/ListStoreService";
 
@@ -8,7 +9,7 @@ export default class ListStoreController {
 
         const stores = await listStoreService.execute(request);
 
-        return response.json(stores);
+        return response.json(classToClass(stores));
 
     };
 };
