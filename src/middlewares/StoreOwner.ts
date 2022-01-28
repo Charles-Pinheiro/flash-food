@@ -5,12 +5,14 @@ import { StoreRepository } from '../repositories/Store/StoresRepository';
 export default async function storeOwner(request: Request, _: Response ,next: NextFunction): Promise<void> {
     const userId = request.user.id;
 
-    const { store_id } = request.params;
+    const { store_id } = request.params;    
 
     const storeRepository = new StoreRepository();
 
     const store = await storeRepository.findOne({ store_id });
 
+    console.log(store);
+    
     if (!store) {
         throw new AppError('Store not found!', 404);
     }

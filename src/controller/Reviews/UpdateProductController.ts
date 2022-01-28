@@ -1,17 +1,18 @@
 import { Request, Response } from "express";
 import AppError from "../../errors/appError";
-import UpdateProductService from "../../services/Product/UpdateProductService";
+import UpdateReviewService from "../../services/Review/UpdateReviewService";
 
-export default class UpdateProductController {
+export default class UpdateReviewController {
+
     async handle(request: Request, response: Response) {
-        const updateProductService = new UpdateProductService();
 
-        const { id } = request.params;
-        return updateProductService.execute(id, request.body).then(
+        const updateReviewService = new UpdateReviewService();
+    
+        return await updateReviewService.execute(request).then(
             res => {return response.json(res)}
         ).catch(
             (err: AppError) => {
                 return response.status(err.statusCode).json({message: err.message})    
         });
-    }
+    };
 }

@@ -20,14 +20,14 @@ productRouter.post(
 productRouter.delete(
     "/:store_id/product/:id",
     Authentication,
-    storeOwner,
+    // storeOwner,
     deleteProduct.handle
 );
 
 productRouter.put(
     "/:store_id/product/:id",
     Authentication,
-    storeOwner,
+    // storeOwner,
     updateProduct.handle
 )
 

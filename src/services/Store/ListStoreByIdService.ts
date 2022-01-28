@@ -3,7 +3,6 @@ import { getCustomRepository } from "typeorm";
 import { StoreRepository } from "../../repositories/Store/StoresRepository";
 import Store from "../../models/Stores";
 
-
 export default class ListStoreByIdService {
     async execute(request: Request): Promise<Store[]> {
         const storeRepository = getCustomRepository(StoreRepository);

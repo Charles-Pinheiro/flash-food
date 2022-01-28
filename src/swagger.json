@@ -1,0 +1,374 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "FLASHFOOD",
+        "description": "Sistema desenvolvido para que pessoas possam encontrar Restaurantes, Pizzarias Hamburguerias... proximo ao seu endereço, e assim realizar um pedido no estabelecimento desejado",
+        "version": "1.0.0"
+    },
+
+    "paths": {
+        "/accounts": {
+            "post": {
+                "tags": ["Users"],
+                "summary": "Create new User",
+                "description": "Rota de criação de novos usuários",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "username": "menino_ney",
+                                    "password": "1234",
+                                    "email": "ney@gmail.com",
+                                    "lastName": "Menino",
+                                    "firstName": "Ney",
+                                    "isPartner": true,
+                                    "street": "Av. das Javeiras",
+                                    "district": "St. Kiola",
+                                    "number": 999,
+                                    "city": "São Luis",
+                                    "state": "MA",
+                                    "cep": "78550-000"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": { "description": "User created successfully" },
+                    "400": { "description": "incorrect request or user already exists" }
+                }
+            }    
+        },
+        
+        "/login": {
+            "post": {
+                "tags": ["Users"],
+                "summary": "Enter the system",
+                "description": "Rota de fazer Login",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": { 
+                                    "email": "ney@gmail.com",
+                                    "password": "1234"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": { "description": "Login successfully" },
+                    "401": { "description": "Incorrect email or password" },
+                    "500": { "description": "Internal Server Error" }
+                }
+            }  
+        },
+        "/store": {
+            "post": {
+                "tags": ["Stor"],
+                "summary": "Register Stor",
+                "description": "Rota para criar Stor",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "name": "BakaGaijin",
+                                    "category": "restaurante",
+                                    "street": "Av. Alta Floresta",
+                                    "district": "Princesa Isabel",
+                                    "number": 2440,
+                                    "city": "Alta Floresta D'Oeste - RO",
+                                    "state": "RO",
+                                    "cep": "76954-000"
+                                }
+                            }
+                        }
+                        
+                    }
+                },
+                "responses": {
+                    "201": { "description": "Stor created successfully" },
+                    "400": { "description": "incorrect request" },
+                    "401": { "description": "Incorrect Token" }
+                }
+            },
+            "get": {
+                "tags": ["Stor"],
+                "summary": "All stors",
+                "description": "Rota para listar Stors",
+                
+                "responses": {
+                    "200": { "description": "All stors" },
+                    "401": { "description": "Incorrect Token" }
+                }
+            }    
+        },
+        "/api/stor?category=restaurante": {
+            "get": {
+                "tags": ["Stor"],
+                "summary": "List Story By Category",
+                "description": "Rota para Listar store pela categoria",
+                "responses": {
+                    "200": { "description": "All stors by category" },
+                    "401": { "description": "Incorrect Token" }
+                }
+            }
+        },
+        "/api/stor/{pk}/products?category=drink": {
+            "get": {
+                "tags": ["Stor"],
+                "summary": "List products by Category",
+                "description": "Rota para listar produtos da Store pela categoria",
+                "responses": {
+                    "200": { "description": "All products by category" },
+                    "401": { "description": "Incorrect Token" }
+
+                }
+            }
+        },
+        "/api/store/products/{pk}": {
+            "get": {
+                "tags": ["Stor"],
+                "summary": "List products by ID",
+                "description": "Rota para listar produtos da Store pelo ID",
+                "parameters": [{"in": "path", "name": "pk", "schema": {
+                    "type": "string"
+                },
+                "required": true
+            }],
+                "responses": {
+                    "200": { "description": "Products of story by id" },
+                    "401": { "description": "Incorrect Token" }
+                }
+            }
+        },
+        "api/store/{pk}": {
+            "put": {
+                "tags": ["Stor"],
+                "summary": "Updated Stor",
+                "description": "Rota para atualizar Stor",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "name": "Baka Gaijin 03",
+                                    "category": "hamburgueria",
+                                    "street": "Av. Alta Floresta",
+                                    "district": "Princesa Isabel",
+                                    "number": 2440,
+                                    "city": "Alta Floresta D'Oeste - RO",
+                                    "state": "RO",
+                                    "cep": "76954-000"
+                                }
+                            }
+                        }
+                        
+                    }
+                },
+                "responses": {
+                    "200": { "description": "Stor updated successfully" },
+                    "400": { "description": "incorrect request" },
+                    "401": { "description": "Incorrect Token" }
+                }
+            },
+            "delete": {
+                "tags": ["Stor"],
+                "summary": "Deleted Stor",
+                "description": "Rota para deletar Stor",
+                "responses": {
+                    "204": { "description": "Stor deleted successfully" },
+                    "400": { "description": "incorrect request" },
+                    "401": { "description": "Incorrect Token" },
+                    "404": { "description": "Stor Not Found" }
+                }
+            } 
+        },
+        "/api/{pk}/product/": {
+            "post": {
+                "tags": ["Product"],
+                "summary": "Created product",
+                "description": "Rota para criar um produto",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "name": "Coca-cola",
+                                    "price": 10.99,
+                                    "category": "drink"
+                                  }
+                            }
+                        }
+                        
+                    }
+                },
+                "responses": {
+                    "201": { "description": "Produtc created successfully" },
+                    "400": { "description": "incorrect request" },
+                    "401": { "description": "Incorrect Token" },
+                    "404": { "description": "Product Not Found" }
+                }
+            }
+        },
+        "/api/{pk}/product/{pk}/": {
+            "patch": {
+                "tags": ["Product"],
+                "summary": "Updated product",
+                "description": "Rota para atualizar um produto",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "name": "Fanta Lar.",
+                                    "price": 9.99,
+                                    "category": "drink"
+                                  }
+                            }
+                        }
+                        
+                    }
+                },
+                "responses": {
+                    "200": { "description": "Product updated" },
+                    "401": { "description": "Incorrect Token" },
+                    "404": { "description": "Product Not Found" }
+                }
+            },
+            "delete": {
+                "tags": ["Product"],
+                "summary": "Deleted product",
+                "description": "Rota para apagar um produto",
+                "responses": {
+                    "204": { "description": "Product deleted successfully" },
+                    "401": { "description": "Incorrect Token" },
+                    "404": { "description": "Product Not Found" }
+                }
+            }
+        },
+        "api/stor/{pk}/review/": {
+            "post": {
+                "tags": ["Review"],
+                "summary": "Create Review",
+                "description": "Rota para criar um review",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "stars": 5,
+                                    "review": "coquinha boa"
+                                  }
+                            }
+                        }
+                        
+                    }
+                },
+                "responses": {
+                    "201": { "description": "Cretated review" },
+                    "401": { "description": "Incorrect Token" },
+                    "400": { "description": "Incorrect request" },
+                    "404": { "description": "Review Not Found" }
+                }
+            },
+            "get": {
+                "tags": ["Review"],
+                "summary": "Review by ID",
+                "description": "Rota para exibir um review especifico",
+                "responses": {
+                    "200": { "description": "Review by ID" },
+                    "401": { "description": "Incorrect Token" },
+                    "400": { "description": "Incorrect request" },
+                    "404": { "description": "Review Not Found" }
+                }
+            },
+            "put": {
+                "tags": ["Review"],
+                "summary": "Update Review",
+                "description": "Rota para atualizar um review",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "stars": 5,
+                                    "review": "Coquinha gelada"
+                                  }                                  
+                            }
+                        }
+                        
+                    }
+                },
+                "responses": {
+                    "200": { "description": "Updated Review" },
+                    "401": { "description": "Incorrect Token" },
+                    "400": { "description": "Incorrect request" },
+                    "404": { "description": "Review Not Found" }
+                }
+            },
+            "delete": {
+                "tags": ["Review"],
+                "summary": "Delete Review",
+                "description": "Rota para deletar um review",
+                "responses": {
+                    "204": { "description": "Deleted Review" },
+                    "401": { "description": "Incorrect Token" },
+                    "400": { "description": "Incorrect request" },
+                    "404": { "description": "Review Not Found" }
+                }
+            }
+        },
+        "api/stor/{pk}/orders/": {
+            "post": {
+                "tags": ["Orders"],
+                "summary": "Create Order",
+                "description": "Rota para criar um order",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "products": [
+                                        {"id": 11, "quantity": 2}
+                                    ]
+                                }
+                            }
+                        }
+                        
+                    }
+                },
+                "responses": {
+                    "201": { "description": "Order created successfully" },
+                    "400": { "description": "incorrect request" },
+                    "401": { "description": "Incorrect Token" },
+                    "404": { "description": "Order Not Found" }
+                }
+            }
+        },
+        "api/stor/orders/": {
+            "get": {
+                "tags": ["Orders"],
+                "summary": "All Orders",
+                "description": "Rota para exibir os orders",
+        
+                "responses": {
+                    "200": { "description": "All orders" },
+                    "401": { "description": "Incorrect Token" }
+                }
+            }
+        }
+    }
+}

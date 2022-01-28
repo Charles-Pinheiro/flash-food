@@ -6,7 +6,6 @@ import { verify } from "jsonwebtoken";
 import AppError from "../../errors/appError";
 import Store from "../../models/Stores";
 
-
 export default class ListStoreService {
     async execute(request: Request): Promise<Store[]> {
         const storeRepository = getCustomRepository(StoreRepository);
