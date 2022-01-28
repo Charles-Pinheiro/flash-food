@@ -10,7 +10,7 @@ export class RelationProductWithCategory1643116060955 implements MigrationInterf
         await queryRunner.query(`ALTER TABLE "address" DROP COLUMN "number"`);
         await queryRunner.query(`ALTER TABLE "address" ADD "number" integer NOT NULL`);
         await queryRunner.query(`ALTER TABLE "products" DROP COLUMN "price"`);
-        await queryRunner.query(`ALTER TABLE "products" ADD "price" integer NOT NULL`);
+        await queryRunner.query(`ALTER TABLE "products" ADD "price" float NOT NULL`);
         await queryRunner.query(`ALTER TABLE "products" ADD CONSTRAINT "FK_ff56834e735fa78a15d0cf21926" FOREIGN KEY ("categoryId") REFERENCES "products_category"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
         //await queryRunner.query(`ALTER TABLE "stores" ADD CONSTRAINT "FK_2b7a7a6d458c6ef149370c5f210" FOREIGN KEY ("storeCategoriesStoreCategoryId") REFERENCES "store_category"("store_category_id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
         //await queryRunner.query(`ALTER TABLE "stores" ADD CONSTRAINT "FK_d5740b38aa467721802eb30f24f" FOREIGN KEY ("addressId") REFERENCES "address"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);

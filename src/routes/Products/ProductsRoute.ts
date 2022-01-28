@@ -1,9 +1,11 @@
 import { Router } from "express";
 import CreateProductController from "../../controller/Products/CreateProductController";
 import DeleteProductController from "../../controller/Products/DeleteProductController";
+import { productSchema } from "../../controller/Products/schema";
 import UpdateProductController from "../../controller/Products/UpdateProductController";
 import Authentication from "../../middlewares/Authentication";
 import storeOwner from "../../middlewares/StoreOwner";
+import validateSchema from "../../middlewares/ValidateSchema";
 
 const productRouter = Router();
 
@@ -13,6 +15,7 @@ const updateProduct = new UpdateProductController();
 
 productRouter.post(
     "/:store_id",
+    validateSchema(productSchema),
     Authentication,
     createProduct.handle
 );

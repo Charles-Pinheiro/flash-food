@@ -4,33 +4,28 @@ import { ReviewRepository } from "../../repositories/Reviews/ReviewsRepository"
 import AuthConfig from "../../config/auth";
 import { verify } from "jsonwebtoken";
 import AppError from "../../errors/appError";
+import { StoreRepository } from "../../repositories/Store/StoresRepository";
 
 export default class ListReviewService {
     
     async execute(request: Request) {
 
         const reviewRepository = getCustomRepository(ReviewRepository);
-        const header = request.headers.authorization?.replace("Bearer", "");                
+        const storeRepository = getCustomRepository(StoreRepository);
+        const storeId = request.params.store_id;
 
-        if(!header) {
-            const allReviews = await reviewRepository.find();
-            return allReviews;            
-        };        
+        const store = await storeRepository.findOne(storeId);
 
-        try {
-            const [, token] = header.split(" ")
-            const { secret } = AuthConfig.jwt;
-            const { sub } = verify(token, secret);
+        if(!store) {
+            throw new AppError("Store not found.", 404);
+        }
 
-            const reviews = await reviewRepository.find({
-                where: {
-                    userId: sub
-                }
-            });
-            return reviews;
+        const reviews = await reviewRepository.find({
+            where: {
+                storeId
+            }
+        });
+        return reviews;
 
-        }catch(err) {            
-            throw new AppError("Inválid Token");
-        };
     };
 };

@@ -12,7 +12,7 @@ interface ProductRequest {
 }
 
 export default class CreateProductService {
-    public async execute(productRequest: ProductRequest, store_id: string): Promise<Product> {
+    public async execute(productRequest: ProductRequest, store_id: string){
         const {name, price, category} = productRequest;
 
         const createProductCategory = new CreateCategoryProductService();
@@ -27,7 +27,7 @@ export default class CreateProductService {
             throw new AppError('store not found!', 404);
         }
 
-        const product = productRepository.create({
+        try{const product = productRepository.create({
             category: categoryProduct,
             price,
             name,
@@ -36,5 +36,9 @@ export default class CreateProductService {
 
         await productRepository.save(product);
         return product;
+        }catch(err){
+            console.log(err);
+            
+        }
     };
 };
