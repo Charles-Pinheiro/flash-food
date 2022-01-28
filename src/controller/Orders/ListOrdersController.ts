@@ -1,3 +1,4 @@
+import { classToClass } from "class-transformer";
 import { Request, Response } from "express";
 import ListOrderService from "../../services/Order/ListOrderService";
 
@@ -8,7 +9,7 @@ class ListOrdersController {
       request
     );
 
-    return response.status(200).json(order);
+    return response.status(200).json(classToClass(order));
   }
 }
 

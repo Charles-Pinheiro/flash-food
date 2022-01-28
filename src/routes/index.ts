@@ -13,6 +13,6 @@ router.use("/login", LoginRouter);
 router.use("/store", storeRouter);
 router.use("/products", productRouter);
 router.use("/reviews", reviewRouter);
-router.use("/store/:store_id/orders", ordersRouter);
+router.use("/store/orders", ordersRouter);
 
 export default router;

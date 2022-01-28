@@ -59,10 +59,13 @@ export default class CreateOrdersService {
     products.forEach(async (item) => {
       let product = await productRepository.findOne({ where: { id: item.id } });
       const ordersProducts = ordersProductsRepository.create({
-        orderId: order.ordersId,
-        productsId: item.id,
-        unitePrice: product?.price,
+        order: order,
+        product: product,
         quantity: item.quantity,
+        unitePrice: product?.price,
+        orderId: order.ordersId,
+        productsId: product?.id
+
       });
       await ordersProductsRepository.save(ordersProducts);
     });
