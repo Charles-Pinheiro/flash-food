@@ -446,7 +446,7 @@
                 }
             }
         },
-        "/store/orders": {
+        "/orders": {
             "post": {
                 "tags": ["Orders"],
                 "security":[{"bearerAuth": []}],
