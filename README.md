@@ -13,6 +13,8 @@ tem permissão para listar suas lojas, cadastrar uma loja e atualizar ou deletar
 CUSTOMER:
 tem permissão para listar as lojas próximas a seu endereço realizar um pedido e deixar um feedback em uma loja parceira após ter realizado um pedido
 
+## Deploy: https://flashfoodapi.herokuapp.com/
+
 ## **_Como Instalar?_**
 
 - Para instalar, é necessário clonar o projeto e fazer instalação das dependências.
